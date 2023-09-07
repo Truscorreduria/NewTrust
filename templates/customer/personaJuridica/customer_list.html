@@ -1,0 +1,91 @@
+{% extends 'dashboard/index.html' %}
+{% block pageContent %}
+    {% if personaJuridica_list %}
+        <h2 class="mt-3">Registro De Persona Jurídica</h2>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/home/">Trust</a></li>
+            <li class="breadcrumb-item active">Persona Juridica</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                Agregar un nuevo registro al sistema <strong>Trust</strong>
+                <div class=" py-3">
+                    <a href="{% url 'customer:personaJuridica_create' %}" class="btn btn-primary"><i
+                            class="fas fa-plus-circle"></i> Agregar</a>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Registro De Persona Jurídica
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">RUC</th>
+                        <th scope="col">Representante</th>
+                        <th scope="col">Cesionario</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">RUC</th>
+                        <th scope="col">Representante</th>
+                        <th scope="col">Cesionario</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    {% for personaJuridica in personaJuridica_list %}
+                        <tr>
+                            <td>{{ personaJuridica.nombre }}</td>
+                            <td>{{ personaJuridica.ruc }}</td>
+                            <td>{{ personaJuridica.representante }}</td>
+                            {% if personaJuridica.cesionario == True %}
+                                <td>Activo</td> {% else %} <td>Desactivo</td>
+                            {% endif %}
+                            <td>
+                                <a href="{% url 'customer:personaJuridica_update' personaJuridica.ruc %}"
+                                   class="btn btn-success btn-circle btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{% url 'customer:personaJuridica_delete' personaJuridica.ruc %}"
+                                   class="btn btn-danger btn-circle btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                                <a href="#"
+                                   class="btn btn-primary btn-circle btn-sm">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <h1 class="mt-4">Registro De Persona Jurídica</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/home/">Trust</a></li>
+            <li class="breadcrumb-item active">Persona Juridica</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                Agregar un nuevo registro al sistema <strong>Trust</strong>
+                <div class=" py-3">
+                    <a href="{% url 'customer:personaJuridica_create' %}" class="btn btn-primary"><i
+                            class="fas fa-plus-circle"></i> Agregar</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+

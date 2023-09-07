@@ -1,0 +1,81 @@
+{% extends 'dashboard/index.html' %}
+{% block pageContent %}
+    {% if empresa_list %}
+        <h2 class="mt-3">Registro De Empresa</h2>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'customer:personaNatural_list' %}">Persona Natural</a></li>
+            <li class="breadcrumb-item active">Empresa</li>
+        </ol>
+        <div class="card mb-4">
+        <div class="card-body">
+        <div class="card mb-4">
+            <div class="card-body">
+                Agregar un nuevo registro al sistema <strong>Trust</strong>
+                <div class=" py-3">
+                    <a href="{% url 'customer:empresa_create' %}" class="btn btn-primary"><i
+                            class="fas fa-plus-circle"></i> Agregar</a>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Registro De Municipio
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    {% for empresa in empresa_list %}
+                        <tr>
+                            <td>{{ empresa.nombre }}</td>
+                            <td>{{ empresa.direccion }}</td>
+                            <td>{{ empresa.telefono }}</td>
+                            <td>
+                                <a href="#"
+                                   class="btn btn-success btn-circle btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{% url 'customer:empresa_delete' empresa.id %}"
+                                   class="btn btn-danger btn-circle btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <h1 class="mt-4">Registro De Empresa</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'customer:personaNatural_list' %}">Persona Natural</a></li>
+            <li class="breadcrumb-item active">Empresa</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                Agregar un nuevo registro al sistema <strong>Trust</strong>
+                <div class=" py-3">
+                    <a href="{% url 'customer:empresa_create' %}" class="btn btn-primary"><i
+                            class="fas fa-plus-circle"></i> Agregar</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

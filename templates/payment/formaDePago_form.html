@@ -1,0 +1,295 @@
+{% extends 'dashboard/index.html' %}
+{% block pageContent %}
+    {% if form.errors %}
+        <div class="alert alert-danger m-4" role="alert">
+            Verifique los valores <strong> - intente de nuevo! {{ form.errors }}</strong>
+        </div>
+    {% endif %}
+    <form method="post">{% csrf_token %}
+        <div class="row mt-3">
+            <div class="row">
+                <div class="col-md-12 mb-2">
+                    <div class="card shadow-lg border-0 rounded-lg">
+                        <div class="card-header">
+                            Datos poliza
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="#">{{ form.poliza.label }}</label>
+                                    {{ form.poliza }}
+                                </div>
+                                <div class="col">
+                                    <label for="" class="d-block">Ramo</label>
+                                    <input type="text" class="d-block form-control" value="{{ ramo }}" disabled>
+                                </div>
+                                <div class="col">
+                                    <label for="" class="d-block">SubRamo</label>
+                                    <input type="text" class="d-block form-control" value="{{ subRamo }}"
+                                           disabled>
+                                </div>
+                                <div class="col">
+                                    <label for="" class="d-block">Ramo</label>
+                                    <input type="text" class="d-block form-control" value="{{ aseguradora }}"
+                                           disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="" class="d-block">Cliente</label>
+                                    <input type="text" class="d-block form-control" value="{{ cliente }}"
+                                           disabled>
+                                </div>
+                                <div class="col">
+                                    <label for="" class="d-block">Inicio de vigencia</label>
+                                    <input type="text" class="d-block form-control"
+                                           value="{{ fInicioVigencia }}" disabled>
+                                </div>
+                                <div class="col">
+                                    <label for="" class="d-block">Fin de vigencia</label>
+                                    <input type="text" class="d-block form-control"
+                                           value="{{ fInicioVigencia }}" disabled>
+                                </div>
+                                <div class="col">
+                                    <label for="" class="d-block">Grupo</label>
+                                    <input type="text" class="d-block form-control" value="{{ grupo }}"
+                                           disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-3">
+                    <div class="card shadow-lg border-0 rounded-lg">
+                        <div class="card-header">
+                            Recibo
+                        </div>
+                        <div class="card-body">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                            <span class="input-group-text"
+                                                  id="basic-addon1">{{ form.recibo.label }}</span>
+                                </div>
+                                {{ form.recibo }}
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{ form.prima.label }}</span>
+                                </div>
+                                {{ form.prima }}
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{ form.descuento.label }}</span>
+                                </div>
+                                {{ form.descuento }}
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{ form.primaNeta.label }}</span>
+                                </div>
+                                {{ form.primaNeta }}
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{ form.emision.label }}</span>
+                                </div>
+                                {{ form.emision }}
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{ form.iva.label }}</span>
+                                </div>
+                                {{ form.iva }}
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{ form.otrosGastos.label }}</span>
+                                </div>
+                                {{ form.otrosGastos }}
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{ form.total.label }}</span>
+                                </div>
+                                {{ form.total }}
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{ form.comision.label }}</span>
+                                </div>
+                                {{ form.comision }}
+                                <div class="input-group-append">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{ form.porcentajeSubComision.label }}</span>
+                                </div>
+                                {{ form.porcentajeSubComision }}
+                                <div class="input-group-append">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{ form.montoComision.label }}</span>
+                                </div>
+                                {{ form.montoComision }}
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{ form.moneda.label }}</span>
+                                </div>
+                                {{ form.moneda }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="card shadow-lg border-0 rounded-lg">
+                        <div class="card-header">
+                            Calendario de pago
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="#">{{ form.formaPago.label }}</label>
+                                    {{ form.formaPago }}
+                                </div>
+                                <div class="col">
+                                    <label for="#">{{ form.pagoPor.label }}</label>
+                                    {{ form.pagoPor }}
+                                </div>
+                                <div class="col">
+                                    <label for="cantidadPagos">{{ form.cantidadCuotas.label }}</label>
+                                    {{ form.cantidadCuotas }}
+                                </div>
+                                <div class="col">
+                                    <label for="#">{{ form.fecha.label }}</label>
+                                    {{ form.fecha }}
+                                </div>
+                            </div>
+                            <table id="tablaPagos" class="table mt-4">
+                                <thead>
+                                <tr>
+                                    <th>Cuota</th>
+                                    <th>Fecha</th>
+                                    <th>Monto</th>
+                                    <th>Saldo</th>
+                                    <th>Comisión</th>
+                                    <th>Estado</th>
+                                    <th>Días de Mora</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modales de Edición -->
+        <div id="modalsContainer"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <div class=" py-3">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+            <a href="{% url 'customer:personaNatural_list' %}" class="btn btn-secondary"><i
+                    class="fas fa-trash-alt"></i> Cancelar</a>
+        </div>
+    </form>
+
+    <script>
+        // Obtener los elementos y resultado.
+        const primaInput = document.getElementById('id_prima');
+        const descuentoInput = document.getElementById('id_descuento');
+        const primaNetaInput = document.getElementById('id_primaNeta');
+        const otrosGastosInput = document.getElementById('id_otrosGastos');
+        const totalInput = document.getElementById('id_total');
+
+        primaInput.addEventListener('input', actualizarResultado);
+        descuentoInput.addEventListener('input', actualizarResultado);
+        primaNetaInput.addEventListener('input', actualizarResultado);
+        otrosGastosInput.addEventListener('input', actualizarResultado);
+
+        function actualizarResultado() {
+            const primaNeta = parseFloat(primaNetaInput.value) || 0;
+            const prima = parseFloat(primaInput.value) || 0;
+            const descuento = parseFloat(descuentoInput.value) || 0;
+            const otrosGastos = parseFloat(otrosGastosInput.value) || 0;
+            primaNetaInput.value = prima - descuento;
+            totalInput.value = primaNeta + otrosGastos;
+        }
+        const cantidadPagosInput = document.getElementById('id_cantidadCuotas');
+        const fechaPagoInput = document.getElementById('id_fecha');
+        const tablaPagos = document.getElementById("tablaPagos").getElementsByTagName("tbody")[0];
+        const modalsContainer = document.getElementById("modalsContainer");
+
+        cantidadPagosInput.addEventListener("input", generateTable);
+        fechaPagoInput.addEventListener("input", generateTable);
+
+        function generateTable() {
+            tablaPagos.innerHTML = '';
+            modalsContainer.innerHTML = '';
+            const cantidadPagos = parseInt(cantidadPagosInput.value);
+            const fechaPago = new Date(fechaPagoInput.value);
+
+            let saldoTotal = 0;
+
+            for (let i = 1; i <= cantidadPagos; i++) {
+                const cuota = i;
+                const monto = 100; // Cambiar al monto deseado
+                saldoTotal += monto;
+                const fechaCuota = new Date(fechaPago);
+                fechaCuota.setMonth(fechaPago.getMonth() + i - 1);
+
+                const diasMora = Math.max(0, Math.floor((new Date() - fechaCuota) / (1000 * 60 * 60 * 24)));
+
+                const row = `<tr>
+                    <td>${cuota}</td>
+                    <td><input class='form-control' type="date" value="${fechaCuota.toISOString().split('T')[0]}" /></td>
+                    <td><input class='form-control' type="number" value="${monto}" /></td>
+                    <td>${saldoTotal}</td>
+                    <td><input class='form-control' type="number" value="0" /></td>
+                    <td>Pendiente</td>
+                    <td><input class='form-control' type="number" value="${diasMora}" /></td>
+                    <td><button class='btn btn-primary btn-sm' data-toggle='modal' data-target='#modalEditar${cuota}'>Editar</button></td>
+                </tr>`;
+                tablaPagos.innerHTML += row;
+
+                const modal = `
+                <div class="modal fade" id="modalEditar${cuota}" tabindex="-1" role="dialog" aria-labelledby="modalEditarLabel${cuota}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalEditarLabel${cuota}">Editar Cuota ${cuota}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Aquí puedes colocar los campos de edición para la cuota -->
+                                <label for="fechaEdicion${cuota}">Fecha de Pago:</label>
+                                <input id="fechaEdicion${cuota}" class="form-control" type="date" value="${fechaCuota.toISOString().split('T')[0]}" />
+                                <!-- Otros campos de edición... -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                modalsContainer.innerHTML += modal;
+            }
+        }
+    </script>
+{% endblock pageContent %}
+
